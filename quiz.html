@@ -1,0 +1,1549 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            text-align: center;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Simple Quiz</h1>
+        <div id="question"></div>
+        <div id="options"></div>
+        <button id="submit">Submit</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            },
+            {
+                question: "Who wrote 'Hamlet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+                answer: "William Shakespeare"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').innerText = currentQuestion.question;
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.innerText = option;
+                button.classList.add('option');
+                button.onclick = () => selectOption(option);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('options').style.display = 'none';
+            document.getElementById('submit').style.display = 'none';
+            document.getElementById('result').innerText = `You scored ${score} out of ${questions.length}`;
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
+How to Use:
+Copy the code above.
+Open a text editor (like Notepad or VSCode).
+Paste the code into the editor.
+Save the file with a .html extension (e.g., quiz.html).
+Open the saved file in a web browser.
+This simple quiz game will present three questions, and you can select an answer for each. After answering all the questions, it will display your score.
+
+You
+
+it nice write more question under it and create a animation if the person scores everything
+
+BLACKBOXAI
+
+Sure! Below is an updated version of the simple quiz game that includes more questions and an animation that plays when the user scores perfectly (i.e., answers all questions correctly). The animation will be a simple "Congratulations!" message that appears when the user achieves a perfect score.
+
+Complete HTML Code:
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="
+You
+
+write it out
+
+BLACKBOXAI
+
+Sure! Here’s the complete HTML code for a simple quiz game with more questions and an animation that plays when the user scores perfectly:
+
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .congratulations {
+            display: none;
+            font-size: 24px;
+            color: #28a745;
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Simple Quiz</h1>
+        <div id="question"></div>
+        <div id="options"></div>
+        <button id="submit">Submit</button>
+        <div id="result"></div>
+        <div class="congratulations" id="congratulations">Congratulations! You scored 100%!</div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            },
+            {
+                question: "Who wrote 'Hamlet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+                answer: "William Shakespeare"
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean"
+            },
+            {
+                question: "What is the chemical symbol for water?",
+                options: ["H2O", "O2", "CO2", "NaCl"],
+                answer: "H2O"
+            },
+            {
+                question: "Which gas do plants absorb from the atmosphere?",
+                options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                answer: "Carbon Dioxide"
+            },
+            {
+                question: "What is the smallest prime number?",
+                options: ["0", "1", "2", "3"],
+                answer: "2"
+            },
+            {
+                question: "What is the main ingredient in guacamole?",
+                options: ["Tomato", "Avocado", "Onion", "Pepper"],
+                answer: "Avocado"
+            },
+            {
+                question: "Which continent is known as the 'Dark Continent'?",
+                options: ["Asia", "Africa", "Australia", "South America"],
+                answer: "Africa"
+            },
+            {
+                question: "What is the hardest natural substance on Earth?",
+                options: ["Gold", "Iron", "Diamond", "Quartz"],
+                answer: "Diamond"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').innerText = currentQuestion.question;
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.innerText = option;
+                button.classList.add('option');
+                button.onclick = () => selectOption(option);
+                optionsContainer.appendChild(button);
+            });
+You
+
+also add animation of bad eyes if the person loose
+
+BLACKBOXAI
+
+Sure! Below is the complete HTML
+
+You
+
+write it
+
+BLACKBOXAI
+
+Certainly! Below is the complete HTML code for a simple quiz game that includes animations for both a perfect score (a "Congratulations!" message) and a "bad eyes" animation if the user does not score perfectly.
+
+Complete HTML Code:
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .congratulations {
+            display: none;
+            font-size: 24px;
+            color: #28a745;
+            animation: fadeIn 1s;
+        }
+        .bad-eyes {
+            display: none;
+            font-size: 24px;
+            color: #dc3545;
+            animation: shake 0.5s infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes shake {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px); }
+            50% { transform: translate(5px); }
+            75% { transform: translate(-5px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Simple Quiz</h1>
+        <div id="question"></div>
+        <div id="options"></div>
+        <button id="submit">Submit</button>
+        <div id="result"></div>
+        <div class="congratulations" id="congratulations">Congratulations! You scored 100%!</div>
+        <div class="bad-eyes" id="bad-eyes">Oops! Better luck next time!</div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            },
+            {
+                question: "Who wrote 'Hamlet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+                answer: "William Shakespeare"
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean"
+            },
+            {
+                question: "What is the chemical symbol for water?",
+                options: ["H2O", "O2", "CO2", "NaCl"],
+                answer: "H2O"
+            },
+            {
+                question: "Which gas do plants absorb from the atmosphere?",
+                options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                answer: "Carbon Dioxide"
+            },
+            {
+                question: "What is the smallest prime number?",
+                options: ["0", "1", "2", "3"],
+                answer: "2"
+            },
+            {
+                question: "What is the main ingredient in guacamole?",
+                options: ["Tomato", "Avocado", "Onion", "Pepper"],
+                answer: "Avocado"
+            },
+            {
+                question: "Which continent is known as the 'Dark Continent'?",
+                options: ["Asia", "Africa", "Australia", "South America"],
+                answer: "Africa"
+            },
+            {
+                question:
+You
+
+let also add a login to start the quize by adding name password and add a tag that the winnner wins 100000 make it real
+
+BLACKBOXAI
+
+Sure! Below is the complete HTML code for
+
+You
+
+write out
+
+BLACKBOXAI
+
+Certainly! Below is the complete HTML code for a simple quiz game that includes a login form, a message about winning a prize of $100,000, and the quiz functionality with animations for both winning and losing.
+
+Complete HTML Code:
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .congratulations {
+            display: none;
+            font-size: 24px;
+            color: #28a745;
+            animation: fadeIn 1s;
+        }
+        .bad-eyes {
+            display: none;
+            font-size: 24px;
+            color: #dc3545;
+            animation: shake 0.5s infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes shake {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px); }
+            50% { transform: translate(5px); }
+            75% { transform: translate(-5px); }
+            100% { transform: translate(0); }
+        }
+        .login-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-button">Login</button>
+    </div>
+
+    <div class="container" id="quiz-container" style="display: none;">
+        <h1>Simple Quiz</h1>
+        <div id="question"></div>
+        <div id="options"></div>
+        <button id="submit">Submit</button>
+        <div id="result"></div>
+        <div class="congratulations" id="congratulations">Congratulations! You scored 100%! You win $100,000!</div>
+        <div class="bad-eyes" id="bad-eyes">Oops! Better luck next time!</div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            },
+            {
+                question: "Who wrote 'Hamlet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+                answer: "William Shakespeare"
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean"
+            },
+            {
+                question: "What is the chemical symbol for water?",
+                options: ["H2O", "O2", "CO2", "NaCl"],
+                answer: "H2O"
+            },
+            {
+                question: "Which gas do plants absorb from the atmosphere?",
+                options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                answer: "Carbon Dioxide"
+            },
+            {
+                question: "What is the smallest prime number?",
+                options: ["0", "1", "2", "3"],
+You
+
+it not logining in
+
+BLACKBOXAI
+
+I apologize for the oversight. Let's implement a simple login mechanism that allows users to enter a username and password to access the quiz. For this example, we'll use hardcoded credentials for demonstration purposes.
+
+Here's the complete HTML code with a functional login system:
+
+Complete HTML Code with Login Functionality:
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+undefined
+You
+
+ok do it
+
+BLACKBOXAI
+
+Sure! Below is the complete HTML code for a simple quiz game that includes a login form. Users can enter a username and password to access the quiz. The code includes hardcoded credentials for demonstration purposes.
+
+Complete HTML Code:
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .congratulations {
+            display: none;
+            font-size: 24px;
+            color: #28a745;
+            animation: fadeIn 1s;
+        }
+        .bad-eyes {
+            display: none;
+            font-size: 24px;
+            color: #dc3545;
+            animation: shake 0.5s infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes shake {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px); }
+            50% { transform: translate(5px); }
+            75% { transform: translate(-5px); }
+            100% { transform: translate(0); }
+        }
+        .login-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-button">Login</button>
+    </div>
+
+    <div class="container" id="quiz-container" style="display: none;">
+        <h1>Simple Quiz</h1>
+        <div id="question"></div>
+        <div id="options"></div>
+        <button id="submit">Submit</button>
+        <div id="result"></div>
+        <div class="congratulations" id="congratulations">Congratulations! You scored 100%! You win $100,000!</div>
+        <div class="bad-eyes" id="bad-eyes">Oops! Better luck next time!</div>
+    </div>
+
+    <script>
+        // Hardcoded credentials
+        const validUsername = "user";
+        const validPassword = "password";
+
+        // Questions for the quiz
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            },
+            {
+                question: "Who wrote 'Hamlet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+                answer: "William Shakespeare"
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean"
+            },
+            {
+                question: "What is the chemical symbol for water?",
+                options: ["H2O", "O2", "CO2", "NaCl"],
+                answer: "H2O"
+            },
+            {
+                question: "Which gas do plants absorb from the atmosphere?",
+                options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                answer: "Carbon Dioxide"
+            },
+           
+You
+
+crate a simple login with quize game
+
+BLACKBOXAI
+
+Sure! Below is a complete HTML code for a simple login system followed by a quiz game. The user must log in with a predefined username and password
+
+You
+
+write out
+
+BLACKBOXAI
+
+Certainly! Here’s a complete HTML code that implements a simple login system followed by a quiz game. Users will need to log in with a predefined username and password to access the quiz.
+
+Complete HTML Code:
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #quiz-container {
+            display: none;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-button">Login</button>
+    </div>
+
+    <div class="container" id="quiz-container">
+        <h1>Simple Quiz</h1>
+        <div id="question"></div>
+        <div id="options"></div>
+        <button id="submit">Submit</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Hardcoded credentials
+        const validUsername = "user";
+        const validPassword = "password";
+
+        // Questions for the quiz
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            },
+            {
+                question: "Who wrote 'Hamlet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+                answer: "William Shakespeare"
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean"
+            },
+            {
+                question: "What is the chemical symbol for water?",
+                options: ["H2O", "O2", "CO2", "NaCl"],
+                answer: "H2O"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        // Login functionality
+        document.getElementById('login-button').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === validUsername && password === validPassword) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                loadQuestion();
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        // Load the current question
+        function loadQuestion() {
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            optionsElement.innerHTML = '';
+
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option';
+                button.onclick = function() {
+                    selectOption(option);
+                };
+                optionsElement.appendChild(button);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(selectedOption) {
+You
+
+i said a simple one
+
+BLACKBOXAI
+
+Got it! Here’s a simplified version of a login system followed by a quiz game. This version is straightforward and easy to understand.
+
+Simple HTML Code for Login and Quiz Game:
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login and Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #quiz-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-button">Login</button>
+    </div>
+
+    <div class="container" id="quiz-container">
+        <h1>Quiz</h1>
+        <div id="question"></div>
+        <button id="option1"></button>
+        <button id="option2"></button>
+        <button id="option3"></button>
+        <button id="option4"></button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const validUsername = "user";
+        const validPassword = "password";
+
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        document.getElementById('login-button').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === validUsername && password === validPassword) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                loadQuestion();
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+            document.getElementById('option1').textContent = currentQuestion.options[0];
+            document.getElementById('option2').textContent = currentQuestion.options[1];
+            document.getElementById('option3').textContent = currentQuestion.options[2];
+            document.getElementById('option4').textContent = currentQuestion.options[3];
+
+            document.getElementById('option1').onclick = () => checkAnswer(currentQuestion.options[0]);
+            document.getElementById('option2').onclick = () => checkAnswer(currentQuestion.options[1]);
+            document.getElementById('option3').onclick = () => checkAnswer(currentQuestion.options[2]);
+            document.getElementById('option4').onclick = () => checkAnswer(currentQuestion.options[3]);
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                document.getElementById('result').textContent = "Correct!";
+            } else {
+                document.getElementById('result').textContent = "Wrong!";
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(loadQuestion, 1000);
+            } else {
+                setTimeout(() => {
+                    document.getElementById('quiz-container').style.display = 'none';
+                    alert('Quiz completed!');
+                }, 100
+You
+
+make it like the one i said its good
+
+BLACKBOXAI
+
+Sure! Here’s a simple and straightforward implementation of a login system followed by a quiz game. This version is easy to understand and does not include any complex features.
+
+Simple HTML Code for Login and Quiz Game
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0
+You
+
+write
+
+BLACKBOXAI
+
+Certainly! Here’s a simple HTML code for a login system followed by a quiz game. This version is straightforward and easy to understand.
+
+Simple HTML Code for Login and Quiz Game
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login and Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #quiz-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-button">Login</button>
+    </div>
+
+    <div class="container" id="quiz-container">
+        <h1>Quiz</h1>
+        <div id="question"></div>
+        <button id="option1"></button>
+        <button id="option2"></button>
+        <button id="option3"></button>
+        <button id="option4"></button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const validUsername = "user";
+        const validPassword = "password";
+
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        document.getElementById('login-button').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === validUsername && password === validPassword) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                loadQuestion();
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+            document.getElementById('option1').textContent = currentQuestion.options[0];
+            document.getElementById('option2').textContent = currentQuestion.options[1];
+            document.getElementById('option3').textContent = currentQuestion.options[2];
+            document.getElementById('option4').textContent = currentQuestion.options[3];
+
+            document.getElementById('option1').onclick = () => checkAnswer(currentQuestion.options[0]);
+            document.getElementById('option2').onclick = () => checkAnswer(currentQuestion.options[1]);
+            document.getElementById('option3').onclick = () => checkAnswer(currentQuestion.options[2]);
+            document.getElementById('option4').onclick = () => checkAnswer(currentQuestion.options[3]);
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                document.getElementById('result').textContent = "Correct!";
+            } else {
+                document.getElementById('result').textContent = "Wrong!";
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(loadQuestion, 1000);
+            } else {
+                setTimeout(() => {
+                    alert('Quiz completed!');
+                    document.getElementById('quiz-container').style.display = 'none';
+                    document.getElement
+You
+
+write as html
+
+BLACKBOXAI
+
+Sure! Below is the complete HTML code for a simple login system followed by a quiz game. You can copy and paste this code into an HTML file and open it in a web browser to see it in action.
+
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="
+You
+
+writt
+
+BLACKBOXAI
+
+Certainly! Here’s the complete HTML code for a simple login system followed by a quiz game. You can copy and paste this code into an HTML file and open it in a web browser to see it in action.
+
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login and Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #quiz-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-button">Login</button>
+    </div>
+
+    <div class="container" id="quiz-container">
+        <h1>Quiz</h1>
+        <div id="question"></div>
+        <button id="option1"></button>
+        <button id="option2"></button>
+        <button id="option3"></button>
+        <button id="option4"></button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const validUsername = "user";
+        const validPassword = "password";
+
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        document.getElementById('login-button').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === validUsername && password === validPassword) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                loadQuestion();
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+            document.getElementById('option1').textContent = currentQuestion.options[0];
+            document.getElementById('option2').textContent = currentQuestion.options[1];
+            document.getElementById('option3').textContent = currentQuestion.options[2];
+            document.getElementById('option4').textContent = currentQuestion.options[3];
+
+            document.getElementById('option1').onclick = () => checkAnswer(currentQuestion.options[0]);
+            document.getElementById('option2').onclick = () => checkAnswer(currentQuestion.options[1]);
+            document.getElementById('option3').onclick = () => checkAnswer(currentQuestion.options[2]);
+            document.getElementById('option4').onclick = () => checkAnswer(currentQuestion.options[3]);
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                document.getElementById('result').textContent = "Correct!";
+            } else {
+                document.getElementById('result').textContent = "Wrong!";
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(loadQuestion, 1000);
+            } else {
+                setTimeout(() => {
+                    alert('Quiz completed!');
+                    document.getElementById('quiz-container').style.display = '
+You
+
+it not redirecting to the quiz
+
+BLACKBOXAI
+
+I apologize for the oversight. The code provided should work correctly to redirect to the quiz after a successful login. However, I noticed that the code was cut off at
+
+You
+
+nice write now
+
+BLACKBOXAI
+
+Sure! Below is the complete HTML code for a simple login system followed by a quiz game. This version ensures that after a successful login, the user is redirected to the quiz section properly.
+
+html
+
+Verify
+
+Open In Editor
+Edit
+Run
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login and Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #quiz-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-button">Login</button>
+    </div>
+
+    <div class="container" id="quiz-container">
+        <h1>Quiz</h1>
+        <div id="question"></div>
+        <button id="option1"></button>
+        <button id="option2"></button>
+        <button id="option3"></button>
+        <button id="option4"></button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const validUsername = "user";
+        const validPassword = "password";
+
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                answer: "Paris"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        document.getElementById('login-button').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === validUsername && password === validPassword) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                loadQuestion();
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+            document.getElementById('option1').textContent = currentQuestion.options[0];
+            document.getElementById('option2').textContent = currentQuestion.options[1];
+            document.getElementById('option3').textContent = currentQuestion.options[2];
+            document.getElementById('option4').textContent = currentQuestion.options[3];
+
+            document.getElementById('option1').onclick = () => checkAnswer(currentQuestion.options[0]);
+            document.getElementById('option2').onclick = () => checkAnswer(currentQuestion.options[1]);
+            document.getElementById('option3').onclick = () => checkAnswer(currentQuestion.options[2]);
+            document.getElementById('option4').onclick = () => checkAnswer(currentQuestion.options[3]);
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                document.getElementById('result').textContent = "Correct!";
+            } else {
+                document.getElementById('result').textContent = "Wrong!";
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(loadQuestion, 1000);
+            } else {
+                setTimeout(() => {
+                    alert('Quiz completed!');
+                    document.getElementById('quiz-container').style.display = 'none';
+                    document.get
+
+
+
+Share
+New
+Continue
+GPT-4o
+Claude-Sonnet
+Scroll to bottom
