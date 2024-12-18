@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Countdown with Santa Sound</title>
+    <style>
+        body {
+            background: url('data:image/jpeg;base64,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') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .countdown {
+            font-size: 48px;
+            margin-top: 20%;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .message {
+            font-size: 36px;
+            margin-top: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10%;
+            color: white;
+            font-size: 1em;
+            opacity: 0.8;
+            pointer-events: none; /* Prevent interaction */
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .countdown-item {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+        .countdown-item:hover {
+            transform: scale(1.1);
+        }
+        .prayer {
+            font-size: 28px;
+            margin-top: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown"></div>
+    <div class="message">Merry Christmas in advance!</div>
+    <div class="prayer" id="prayer">May the joy of Christmas fill your heart and home with peace and happiness. Merry Christmas!</div>
+    <audio id="christmasSound" src="https://pixabay.com/sound-effects/search/christmas/" loop autoplay></audio>
+
+    <script>
+        function updateCountdown() {
+            const christmas = new Date('December 25, 2024 00:00:00');
+            const now = new Date();
+            const timeDiff = christmas - now;
+
+            if (timeDiff <= 0) {
+                // Countdown has reached zero
+                document.getElementById('countdown').style.display = 'none'; // Hide countdown
+                document.getElementById('prayer').style.display = 'block'; // Show prayer
+                const santaSound = document.getElementById('santaSound');
+                santaSound.pause(); // Stop the sound if desired
+                return; // Exit the function
+            }
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+                <div class="countdown-item">${days} <span>Days</span></div>
+                <div class="countdown-item">${hours} <span>Hours</span></div
+                <div class="countdown-item">${minutes} <span>Minutes</span></div>
+                <div class="countdown-item">${seconds} <span>Seconds</span></div>
+            `;
+
+            // The sound will play continuously in the background
+        }
+
+        function createSnowflakes() {
+            const snowflakeCount = 100; // Number of snowflakes
+            const snowflakeContainer = document.createElement('div');
+            document.body.appendChild(snowflakeContainer);
+
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄'; // Snowflake character
+                snowflake.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                snowflake.style.fontSize = Math.random() * 1 + 0.5 + 'em'; // Random size
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's'; // Random fall duration
+                snowflake.style.animationDelay = Math.random() * 5 + 's'; // Random delay
+                snowflakeContainer.appendChild(snowflake);
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+        createSnowflakes(); // Create snowflakes
+    </script>
+</body>
+</html>
